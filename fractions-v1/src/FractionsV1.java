@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -15,47 +14,49 @@ public class FractionsV1 {
      * Main method reads the file line by line and adds each line to an array.
      *
      * */
-    private static int count = 0;
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         File file = new File("fractions.txt");
-        int i = 0;
-        try {
-            Scanner sc = new Scanner(file);
-            // run through the fractions.txt to find the size of array to declare
-            while (sc.hasNextLine())
-            {
-                // line is the current line of fractions.txt
+        // Try/catch to handle the Scanner file reader (mandatory)
+        try{
+            Scanner reader = new Scanner(file);
+            int arrayLength = 0;
+
+            // Find arrayLength by running through every line in fractions.txt to collect the number of lines.
+            while (reader.hasNextLine()) {
+                arrayLength++;
+                reader.nextLine();
+            }
+
+            // Declare the array to compare values
+            String [] comparer = new String[arrayLength];
+            Scanner fi = new Scanner(file);
+
+            // Add the values to the array
+            int count = 0;
+            while (fi.hasNextLine()) {
+                comparer[count] = fi.nextLine();
                 count++;
-                sc.nextLine();
             }
-            sc.reset();
-            // Declare the array to store all values of the fractions.txt
-            String [] array = new String[count];
-            while (sc.hasNextLine())
-            {
-                array[i] = sc.nextLine();
-                i++;
-                System.out.println(i);
+            // Check for equal strings while ignoring the comparison against self
+            int equal = 0;
+            int print = 0;
+            for (int i = 0; i < comparer.length; i++) {
+                for (int j=i+1; j < comparer.length; j++) {
+                    // Check if the two strings are equal
+                    if (comparer[i].equals(comparer[j])) {
+                        equal++;
+                    }
+                }
+                if (i == comparer.length - 1) {
+                    // Print how many are equal for comparer[i]
+                    System.out.println(comparer[print] + " has a count of " + equal);
+                    equal = 0;
+                    print++;
+                }
             }
-            System.out.println(Arrays.toString(array));
-            // Call counter to split the array and return an array of calculated values.
-            // counter(array);
-        }
-        // Catch the error if the file does not exist
-        catch (FileNotFoundException e)
-        {
+
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
-    /**
-     * counter is a method that takes the array as an input, splits them, and then divides every other number
-     * by the number below it.
-     * */
-//    private static void counter(String[] array)
-//    {
-//
-//        String[] array2 = array.split("/");
-//        System.out.println(Arrays.toString(array2));
-//    }
 }
