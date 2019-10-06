@@ -14,7 +14,49 @@ public class FractionsV1 {
     // A: Yes. You can process and compare each line as they are handled.
     //
     // Q: What is the least number of variables that you can use to solve this problem?
-    // A:
+    // A: I used way more variables than I probably needed to for this problem,
+    //    I would wager that you could do it with 2 variables. A fraction and a counter.
+    //
+    // Q: Can you use just one array to solve this?
+    // A: Yes, you could do the same style that I did, but use variables and other data
+    //    constructs to hold values to compare.
+    //
+    // Q: What would the data type of that array be?
+    // A: The array would be a string array, the program itself would use casting to convert the
+    //    Strings into ints, then compare them and place them in the array as strings.
+    //
+    // Q: What does it mean to make a class so another class is inside (or part of) the first class,
+    //    so that it is composed of other data types?
+    // A: Composition - combining simple types to make more complex types. You can inherit behavior
+    //    from a class, you can write the behavior into the class, or you can incorporate a class
+    //    with the desired behavior as a member variable.
+    //
+    // Q: What does "composition" mean in that case? How is it done?
+    // A: Composition in this case refers to a has-a relationship. It simply refers to the parts that
+    //    make up the whole. A car has wheels, an engine, and seats. EX: Inheritance is a "is a " relationship
+    //    Composition is a "has a" relationship.
+    //    Ex (from StackOverflow in the context of inheritance from Person : Mammal : Animal):
+    //    Animal:
+    //          Skin animalSkin
+    //          Organs animalOrgans
+    //
+    //    Mammal::Animal:
+    //          private Hair/fur mammalFur
+    //          Hair/fur mammalFur
+    //          warm-blooded-based_circulation_system heartAndStuff
+    //
+    //    Person::Mammal:
+    //          private Mammal _mammalRef
+    //          String firstName
+    //          String lastName
+    //
+    // Q: What are some solutions to the reduction problem other than Euclid's GCD (Greatest Common Divisor)
+    //    algorithm?
+    // A: Lehmer's GCD algorithm is faster than Euclid's GCD. There is also Stein's algorithm for finding GCD.
+    //    Both are complex and lengthy, so I won't include an example.
+    //    Link to Stein's GCD algorithm (binary): https://www.geeksforgeeks.org/steins-algorithm-for-finding-gcd/
+    //    Link to Lehmer's GCD algo:
+    //    https://stackoverflow.com/questions/16989677/lehmers-extended-gcd-algorithm-implementation
 
     /**
      * Main method reads the file line by line and adds each line to an array.
@@ -29,12 +71,12 @@ public class FractionsV1 {
      * */
     public static void main(String[] args) {
         File file = new File("fractions.txt");
-        // Try/catch to handle the Scanner file reader (mandatory)
-        try{
+
+        try { // Try/catch to handle the Scanner file reader (mandatory)
             Scanner reader = new Scanner(file);
             int arrayLength = 0;
 
-            // Find arrayLength by running through every line in fractions.txt to collect the number of lines.
+            // Find arrayLength by running through every line in fractions.txt to collect the number of lines. O(N)
             while (reader.hasNextLine()) {
                 arrayLength++;
                 reader.nextLine();
@@ -54,10 +96,16 @@ public class FractionsV1 {
                 fractionCheck(comparer, i);
             }
 
-            String [] prev = new String[comparer.length];
+            String [] prev = new String[comparer.length]; // Declare a new array for storing past comparison values
             // Get the count for the total fraction duplicates --> then print the results
             for (int i = 0; i < comparer.length; i++) {
-                    System.out.println(findDuplicates(comparer, i, prev));
+                    String dup = findDuplicates(comparer, i, prev);
+                    if (dup == null) { // if val = compared before, skip
+                        continue;
+                    }
+                    else { // else, print the fraction and count
+                        System.out.println(dup);
+                    }
             }
         } catch (FileNotFoundException e) { // Error handling for scanner
             e.printStackTrace();
@@ -91,7 +139,7 @@ public class FractionsV1 {
                 continue;
             }
             if (s.equals(array[target])) { // If the method has been compared before, stop the method
-                return "";
+                 return null;
             }
         }
         int duplicateCount = 0; // number of duplicate fractions
@@ -115,12 +163,14 @@ public class FractionsV1 {
         int numerator = Integer.parseInt(fraction[0]);
         int denominator = Integer.parseInt(fraction[1]);
         int gcd = GCD(numerator, denominator);  // Get the GCD for each fraction
+
         // Simplify the fraction
         numerator /= gcd;
         denominator /= gcd;
         // Replace the index value in the array with the simplified fraction.
         array[target] = numerator + "/" + denominator;
 
+        // return the concatenated string as array[i] to fill array index i with the simplified fraction value.
         return array[target];
     }
 }
