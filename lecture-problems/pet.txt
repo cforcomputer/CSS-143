@@ -1,0 +1,23 @@
+private String animalType;
+
+public Pet(Pet inPet) { // pet object
+	this.name = inPet.getName(); // one way of doing it (calling the getter)
+		// can also do
+		  = inPet.name;
+	this.age = inPet.getAge();
+	this.weight
+	this.animalType
+}
+
+class Temperature
+{
+	private float temperature;
+	private char scale = "c"; // c for celsius, f for fahrenheit
+
+	Temperature() {} // default
+	Temperature(float temp, char sc)
+	{
+		this.temperature = temp;
+
+	}
+		
