@@ -42,6 +42,7 @@ public class Money
 
     /**
      * This constructor should redirect to the one above
+     * @param other = new money object as input
      * */
     Money(Money other)
     {
@@ -51,50 +52,56 @@ public class Money
         }
         else
         {
+            // Assign values of other object to this object
             this.dollars = other.dollars;
             this.cents = other.cents;
         }
     }
-    // All the getters and setters should avoid privacy leaks
+
+    // Note: All the getters and setters should avoid privacy leaks
     /**
      * The getter method for the dollars instance variable
+     * @return the instance variable dollar amount
      * */
-    private int getDollars()
+    public int getDollars()
     {
         return dollars;
     }
 
     /**
      * This is the getter method for the cents instance variable
+     * @return the instance variable amount in cents
      * */
-    private int getCents()
+    public int getCents()
     {
         return cents;
     }
 
     /**
      * This is the setter method for the dollars instance variable
+     * @param dollars = the new value that the instance variable dollars
+     *                will be set to.
      * */
-    private void setDollars(int dollars)
+    public void setDollars(int dollars)
     {
         this.dollars = dollars;
     }
 
     /**
      * This is the setter method for the cents instance variable
+     * @param cents = the new value in cents (between 0 and 99)
      * */
-    private void setCents(int cents)
+    public void setCents(int cents)
     {
         if (cents > 99 || cents < 0)
         {
-            System.err.println("Invalid cent value! Must be between 0 and 99, inclusive.");
-            //if cents input value is NOT between 0 and 99, then print error message and exit
+            // If cents value is not between 0 and 99, print and exit.
+            System.err.println("You've entered an invalid cent value. Must be between 0 and 99!");
             System.exit(-1);
         }
         else
         {
-            this.cents = cents;
-            //if it is a valid input, then set the instance var to the cents input int
+            this.cents = cents; // If it is valid, set
         }
     }
     /**
@@ -109,16 +116,18 @@ public class Money
     /**
      * This method sets our dollars and cents accordingly
      * This function should make use of setters for dollars and cents
+     * @param dol = the new dollar amount
+     * @param cent = the new cent amount
      * */
     void setMoney(int dol, int cent)
     {
-        //make new temp var to store the current dollars plus the input dollars
+        // Temp to store the current dollars + the input dollars
         int newDollars = (getDollars() + dol);
 
-        //make new temp var to store the current cents plus the input cents
+        // Temp to store the current cents + the input cents
         int newCents = (getCents() + cent);
 
-        //if the new cent value is over 99 then:
+        // New cent value is over 99 then
         centCheck(newDollars, newCents);
     }
 
@@ -131,25 +140,22 @@ public class Money
     {
         if (newCents > 99)
         {
-            //divide the value by 100, giving you the integer value and no remainder (dollars)
+            // Gives you the integer value and no remainder for dollars
             int tempDollars = (newCents / 100);
-            //take modulus 100 of the value, giving you the remainder value (cents)
+            // Gives you the remainder value for cents
             int tempCents = (newCents % 100);
 
+            // add the new amount of dollars
             setDollars(newDollars + tempDollars);
-            //add the new amount of dollars (made up of cents over 99 and the dollar input to this method)
-
+            // add the new amount of cents
             setCents(tempCents);
-            //add the new amount of cents (remainder from the modulus)
-
         }
         else
         {
+            // if cents is still less than 99, then add the new dollar value to dollars
             setDollars(newDollars);
-            //if cents is still less than 99, then just add the new dollar value to dollars
-
+            // if cents is still less than 99, then add the new cents value to cents
             setCents(newCents);
-            //if cents is still less than 99, then just add the new cents value to cents
         }
     }
 
@@ -166,16 +172,17 @@ public class Money
 
     /**
      * This method takes a new money object as a method input
+     * @param other = a new money object
      * */
     public void add(Money other)
     {
-        //make new temp var to store the current dollars plus the other obj's dollars
+        // make new temp variable to store this dollars + that dollars
         int newDollars = (other.getDollars() + getDollars());
 
-        //make new temp var to store the current cents plus the other obj's cents
+        // make new temp variable to store this cents + that cents
         int newCents = (other.getCents() + getCents());
 
-        //if the new cent value is over 99 then:
+        // if the new cent value is over 99
         centCheck(newDollars, newCents);
     }
 
@@ -190,14 +197,16 @@ public class Money
     {
         if (!(o instanceof Money))
         {
-            return false; //if input Obj is null or not an instance of Money class, return false
+            return false; // If the input object is null or not an instance of Money class,
+            // return false
         }
 
-        //if it's NOT null and IS an instance of Money class then:
+        // if it's NOT null and IS an instance of Money class
+        // create a new Money object (instance of Money class) called that, storing
+        // the input object.
         Money that = (Money)o;
-        //create a new Money object (instance of Money class) called that and store input Obj in it
 
-        //return true if cents and dollar amounts are equivalent between Money objects
+        // If cents and dollars are true between objects, return true, otherwise false
         return this.cents == that.cents && this.dollars == that.dollars;
     }
 

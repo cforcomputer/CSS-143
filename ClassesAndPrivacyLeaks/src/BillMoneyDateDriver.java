@@ -13,6 +13,7 @@ public class BillMoneyDateDriver
      */
     public static void main(String[] args)
     {
+        int errorCount = 0; // records how many tests failed
         /*
         Functionality OOP testing
         These following tests are to see if the output
@@ -20,8 +21,8 @@ public class BillMoneyDateDriver
         are working as they should be.
          */
         // Create new money object for testing
-        Money m1 = new Money(40); // new Money class obj
-        Money m2 = new Money(m1); // new Money class obj copying that previous one
+        Money m1 = new Money(40); // Create a new money class object
+        Money m2 = new Money(m1); // Create a new money class object using the previous
 
         m1.setMoney(40, 90); // set the money amount for m1
         m2.setMoney(295, 30);
@@ -29,12 +30,12 @@ public class BillMoneyDateDriver
 
         m3.setMoney(60, 80); // set the money amount for m3
 
-        // print out each output of the Money objects
+        // print out the outputs for the money objects
         System.out.println("Money: \n");
         System.out.println("Money One: \n" + m1 + "\n\nMoney Two:\n" + m2 +
                 "\n\nMoney Three: \n" + m3 + "\n");
 
-        // Create new bill objs
+        // Create new bill objects
         // Set the new Date class object to a date
         Date dueDate = new Date(2, 21, 2015);
         // Set the new paidDate object to a date
@@ -46,31 +47,53 @@ public class BillMoneyDateDriver
         Bill billOne = new Bill(amount, dueDate, "The cloud-networking company");
         //new Bill class obj that is set to the amount, dueDate, and originator
 
-        billOne.setPaidDate(paidDate);
-        //should be true that it is paid bc paid date was before due date
-        //set a paid date to the first Bill class obj
-        Bill billTwo = new Bill(billOne);
-        // copy the first Bill obj and create a second Bill obj
-        // with same as first Bill obj
-        billTwo.setAmount(m3); //set new Money amount value for new bill
-        //set new value for paidDate for second Bill obj
-        paidDate.setDate(5, 31, 2015);
-        billTwo.setPaidDate(paidDate); //set it to paidDate on second Bill obj
-        //should return false because it was paid after due date
+        billOne.setPaidDate(paidDate); // set a paid date to first Bill class object
 
-        amount.setMoney(53, 17); //set a new money amount
-        //set the dueDate on second Bill obj
+        Bill billTwo = new Bill(billOne); // True since paid before the due date
+        // copy the first Bill object and declare a second one
+        // with the same values as the first one
+
+        billTwo.setAmount(m3); // Set the new amount value for bill
+        // set new value for paidDate for the second Bill object
+        paidDate.setDate(5, 31, 2015);
+        billTwo.setPaidDate(paidDate); // Set to paidDate on second Bill object
+        // should return false because it was paid after due date
+        if (billTwo.isPaid())
+        {
+            System.err.println("There is something wrong with the paidDate method in" +
+                    "the bill class!");
+            errorCount++;
+        }
+        else
+        {
+            System.out.println("Test passed!");
+        }
+
+        // --------------------------------------------------------------------------------
+        amount.setMoney(53, 17); // set a new money amount
+
+        // set the dueDate on second Bill obj
         billTwo.setDueDate(new Date(5, 30, 2015));
         dueDate.setDay(22); //set a new day
         Bill billThree = new Bill(amount, dueDate, "The software company");
-        //new Bill class obj that is set to the amount, dueDate, and originator
-        billThree.setAmount(m1); //set new money amount value for new bill
-        paidDate.setDate(2,  20, 2015); //set new paidDate
-        //set this new paidDate to the paidDate in third Bill obj
-        billThree.setPaidDate(paidDate);
-        //should return true
 
-        System.out.println("\n\n\nBills: \n");
+        // new Bill class obj that is set to the amount, dueDate, and originator
+        billThree.setAmount(m1); // set new money amount value for new bill
+        paidDate.setDate(2,  20, 2015); // set new paidDate
+
+        // set this new paidDate to the paidDate in third Bill obj
+        billThree.setPaidDate(paidDate); // should return true
+        if (!billThree.isPaid())
+        {
+            System.err.println("Something is wrong with the paidDate method!");
+            errorCount++;
+        }
+        else
+        {
+            System.out.println("Test passed!");
+        }
+
+        System.out.println("\n\nBills: \n");
 
         // Print all bill objects
         System.out.println("Bill One: \n" + billOne +
@@ -92,21 +115,55 @@ public class BillMoneyDateDriver
         else
         {
             System.err.println("getMoney method in Money class isn't working right!");
+            errorCount++;
         }
 
+        // Add a negative number to make the total money value equal to 0
+        // The following test will fail if negative numbers do not work.
+        m4.add(-20);
+
+        // Change these values to test the method
+        int num1 = 10, num2 = 5;
+        int sumTest = num1 + num2;
         // Testing for the Money add() method
-        System.out.println("\nRunning test on Money add() \nAdding 10 to dollars");
-        m4.add(10);
-        m4.add(5);
-        if (m4.getMoney() == 35)
+        System.out.println("\nRunning test on Money add() \nAdding " +
+                sumTest + " dollars");
+        m4.add(num1);
+        m4.add(num2);
+
+        if (m4.getMoney() == (sumTest))
         {
             System.out.println("Money total is: " + m4.getMoney() + "\nTest passed!");
         }
         else
         {
             System.err.println("The Money add() method isn't working right!");
+            errorCount++;
         }
 
-        System.out.println("\nAll tests have passed!");
+        // Test for money object class
+        Money m5 = new Money(40);
+        m5.add(m5);
+        System.out.println(m5.getMoney());
+        if (m5.getMoney() == 80)
+        {
+            System.out.println("Test passed!");
+        }
+        else
+        {
+            System.err.println("Something is wrong with Money add(Object money) method");
+            errorCount++;
+        }
+
+        // Say whether all the tests passed or not
+        if (errorCount == 0)
+        {
+            System.out.println("\nAll tests have passed!\nThere were 0 errors.");
+        }
+        else
+        {
+            System.out.println("Not all tests passed\nThere were " + errorCount +
+                    " errors.");
+        }
     }
 }

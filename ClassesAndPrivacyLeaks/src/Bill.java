@@ -3,9 +3,7 @@
  * @version 10/22/2019
  *
  * Bill Class
- * */
-
-/**
+ *
  * 1. The internal paid date should be on or earlier than the due date.
  * 2. Every Bill is owed someone, so the originator should never be empty.
  * Data privacy should be maintained at all times.
@@ -27,12 +25,14 @@ public class Bill
     public void setOriginator(String orig)
     {
         if (orig == null)
-        { //if null, print error message
+        {
+            // if null, print error
             System.err.println("No originator entered.");
             System.exit(-1);
         }
         else
-        { //if not null, set instance var to input
+        {
+            //if not null, set instance variable to the input
             originator = orig;
         }
     }
@@ -49,25 +49,21 @@ public class Bill
 
 
     /**
-     * setter method for dueDate which sets the duedate as
+     * This method is a setter method for dueDate which sets the dueDate as
      * param value if it is a valid input
-     * @param nextDueDate
+     * @param nextDueDate = Date object input containing date values
      */
     public void setDueDate(Date nextDueDate)
     {
         if (nextDueDate == null)
-        { //if input is null value print error message
+        { // if input is null value print error message
             System.err.println("No date has been entered.");
             System.exit(-1); //and exit
         }
         else
         {
-            //if it is a valid input value then
-            Date dueDate2 = new Date(nextDueDate);
-            //create new instance/object of Date class and store input value
-
-            dueDate = dueDate2;
-            //then set the instance variable to this value
+            // if it is a valid input value then
+            dueDate = new Date(nextDueDate);
         }
     }
 
@@ -81,28 +77,27 @@ public class Bill
     }
 
     /**
-     * setter method for paidDate using input Date obj var.
+     * setter method for paidDate using input Date object variable.
      * copying an object because paidDate is an object
-     * @param pd
+     * @param paidDate = paidDate Date input
      */
-    public void setPaidDate(Date pd)
+    public void setPaidDate(Date paidDate)
     {
-        if (pd == null)
+        if (paidDate == null)
         {
             System.err.println("No date has been entered.");
             System.exit(-1);
         }
         else
         {
-            //set a new instance/object of Date class and use it to store input value
-            paidDate = new Date(pd);
-            //set the instance var equal to this input value
+            // set a new instance/object of Date class and use it to store input value
+            this.paidDate = new Date(paidDate);
         }
     }
 
     /**
-     * getter method to return paidDate
-     * @return Date
+     * Getter method to return paidDate
+     * @return Date object
      */
     public Date getPaidDate()
     {
@@ -110,9 +105,9 @@ public class Bill
     }
 
     /**
-     * setter method to set paidDate to null if bill has yet to be paid still
+     * The setter method to set paidDate = null if still not paid
      */
-    public void unpaidBill()
+    public void setUnpaid()
     {
         paidDate = null;
     }
@@ -126,37 +121,36 @@ public class Bill
      */
     public Bill(Money amount, Date date, String orig)
     {
-        //for amount, due date, and originator, set to param value
+        // for amount, due date, and originator, set to param value
         setAmount(amount);
         setDueDate(date);
         setOriginator(orig);
 
-        //paid date is set to null because it has not yet been paid
-        paidDate = null;
+        // paid date is set to null because it has not yet been paid
+        setUnpaid();
     }
 
     /**
      * setter for the amount of money. copy an object constructor because
      * the amount is an object.
-     * @param amt = amount Money object input as param
+     * @param amount = amount Money object input as param
      */
-    public void setAmount(Money amt)
+    public void setAmount(Money amount)
     {
-        if (amt == null)
+        if (amount == null)
         {
             System.err.println("No amount was entered");
             System.exit(-1);
         }
         else
         {
-            //create new instance/object of Money class and use it to store param value
-            amount = new Money(amt);
-            //set the instance var equal to the input value
+            // New instance/object of Money class, use to store param value
+            this.amount = new Money(amount);
         }
     }
 
     /**
-     * getter method for returning amount of money
+     * This method is a getter method for returning amount of money
      * @return Money obj
      */
     public Money getAmount()
@@ -167,7 +161,7 @@ public class Bill
     /**
      * Determines if two bills are identical
      * @return boolean, false if bills are not identical, true if they are
-     * @param other = new
+     * @param other = new Bill object
      */
     @Override
     public boolean equals(Object other)
@@ -189,7 +183,7 @@ public class Bill
     }
 
     /**
-     * build a string that reports the amount, when its due, to whom,
+     * Build a string that reports the amount, when its due, to whom,
      * whether paid, and if paid, and the date paid.
      * @return The amount and when it was due, and if paidDate is set, the date
      * the payment was paid.
@@ -214,7 +208,7 @@ public class Bill
      * This method checks to see if it is past the due date for the payment.
      * @return true or false, false if it is past the due date, true if it is not
      * */
-    private boolean isPaid()
+    public boolean isPaid()
     {
         if (getPaidDate() != null) // if the PaidDate is not empty
         {
@@ -234,10 +228,10 @@ public class Bill
     /**
      * Overloaded copy constructor of the Bill constructor.
      * Helps to prevent privacy leaks
-     * @param nBill = a new Bill object
+     * @param newBill = a new Bill object
      */
-    Bill(Bill nBill)
+    Bill(Bill newBill)
     {
-        this(nBill.getAmount(), nBill.getDueDate(), nBill.getOriginator());
+        this(newBill.getAmount(), newBill.getDueDate(), newBill.getOriginator());
     }
 }

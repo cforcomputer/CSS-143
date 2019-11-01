@@ -31,88 +31,85 @@ public class Date
 
     /**
      * (Overloaded) Copy constructor
-     * @param date =
+     * @param date = takes a new Date object as input
      */
     public Date(Date date)
     {
         this(date.getMonth(), date.getDay(), date.getYear());
     }
 
-
     /**
      * Equals method will check if two instances / objects
      * are equivalent or not.
      * @return boolean
-     * @param other =
+     * @param other = takes a Date object as input
      */
     @Override
     public boolean equals(Object other){
         if (!(other instanceof Date)){
             return false;
-            //if input Object is null or not and instance of Date class, return false
+            // if input Object is null or not and instance of Date class, return false
         }
 
+        // create new instance of the Date class (a Date obj) that will represent the input
         Date that = (Date)other;
-        //create new instance of the Date class (a Date obj) to represent the input obj
-
-        return this.getMonth() == that.getMonth() &&
-                this.getDay() == that.getDay() &&
-                this.getYear() == that.getYear();
-        //returns true if the month day and year of the two dates are equivalent
+        // Returns true if the month and day are equivalent for this and that,
+        // false if not.
+        return this.getMonth() == that.getMonth()
+                && this.getDay() == that.getDay()
+                && this.getYear() == that.getYear();
     }
 
+    /**
+     * The setter method for the date (month, day, year).
+     * Focusing on code reuse
+     * @param newMonth = the new month input value to be set
+     * @param newDay = the new day input value to be set
+     * @param newYear = the new year input value to be set
+     */
+    public void setDate(int newMonth, int newDay, int newYear)
+    {
+        // Call the appropriate method to set the day, month, year
+        // preventing privacy leaks through code reuse
+        setMonth(newMonth);
+        setDay(newDay);
+        setYear(newYear);
+    }
 
     /**
      * toString method stores all of the elements of the Date
      * (month, day, year) in a String
-     *
      * @return String
      */
     @Override
     public String toString()
     {
         return getMonth() + "/" + getDay() + "/" + getYear();
-        //format is "mm/dd/yyyy"
     }
 
     /**
-     * setter method for the date (month, day, year).
-     * I copied the code from the Date Constructor to reuse code
-     *
-     * @param int, int, int
+     * This method sets the months
+     * Check to make sure that the month is between 1 and 12
+     * If between 1 and 12, set the instance val for month = newMonth
+     * @param newMonth = the new month value to be checked and set
      */
-    public void setDate(int nM, int nD, int nY)
+    private void setMonth(int newMonth)
     {
-        setMonth(nM);
-        setDay(nD);
-        setYear(nY); //reusing code helps prevent privacy leaks
-        //calls the setDate method and sets it to input month, day, and year
-    }
-
-    /**
-     * setter method for months.
-     * checks if input is valid (month is between 1 and 12 inclusive)
-     * and if it is, sets the intance variable month to input var
-     * @param nMonth =
-     */
-    private void setMonth(int nMonth)
-    {
-        if (nMonth >= 1 && nMonth <= 12)
+        if (newMonth >= 1 && newMonth <= 12)
         {
-            //if nMonth is between 1 and 12 inclusive,
-            this.month = nMonth;
-            //set the instance var month to nMonth
+            // if between 1 and 12
+            this.month = newMonth; // set the new value for the instance variable
         }
         else
         {
-            //if not, print error message
-            System.err.println("Invalid month value. Must be between 1 and 12, inclusive.");
+            // if not, print error
+            System.err.println("Invalid month value, must be between 1 and 12");
         }
     }
 
     /**
-     * getter method to return month value
-     * @return int
+     * This method returns the month variable
+     * @return the month instance variable
      */
     public int getMonth()
     {
@@ -123,15 +120,14 @@ public class Date
      * setter method for day.
      * checks if input is between 1 and 31 inclusive.
      * Even though there are some months that only have 30 days or 28 (Feb)
-     *
-     * @param nDay =
+     * @param newDay = takes the new day value to be checked and set
      */
-    public void setDay (int nDay)
+    public void setDay (int newDay)
     {
-        if (nDay >= 1 && nDay <= 31)
+        // if the day is between 1 and 31, then
+        if (newDay >= 1 && newDay <= 31)
         {
-            //if the day is between 1 and 31 then set the instance var to this
-            this.day = nDay;
+            this.day = newDay;
         }
     }
 
@@ -145,23 +141,24 @@ public class Date
     }
 
     /**
-     * setter method for year
-     * year must be between 2014 and 2024 inclusive
-     * @param nYear =
+     * The year instance variable setter method
+     * Year must remain realistic and cannot be negative.
+     * @param newYear = the new year instance variable value checked and set
      */
-    public void setYear(int nYear){
-        if (nYear >= 2014 && nYear <= 2024){
-            //if year is between 2014 and 2024, then
-            this.year = nYear; //set the instance var equal to this
+    public void setYear(int newYear)
+    {
+        if (newYear >= 2001 && newYear <= 2024) // if the year is not negative or too high
+        {
+            this.year = newYear; // set the instance variable
         }
     }
 
     /**
-     * getter method to return year value
-     *
+     * The getter method for the current year
      * @return the current year as an int
      */
-    public int getYear(){
+    public int getYear()
+    {
         return year;
     }
 }
