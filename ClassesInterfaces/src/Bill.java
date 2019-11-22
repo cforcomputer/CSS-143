@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 /**
  * @author Patrick O'Brien
  * @version 10/22/2019
@@ -8,8 +10,11 @@
  * 2. Every Bill is owed someone, so the originator should never be empty.
  * Data privacy should be maintained at all times.
  * */
-public class Bill
+public class Bill implements Comparable<Bill>, Cloneable, Serializable
 {
+    // Declare the new serial
+    private static final long serialVersionUID = 958348721914607555L;
+
     // Instance and class variables
     private Money amount; // a Money object
     private Date dueDate; // a Date object
@@ -233,5 +238,40 @@ public class Bill
     Bill(Bill newBill)
     {
         this(newBill.getAmount(), newBill.getDueDate(), newBill.getOriginator());
+    }
+
+
+    /**
+     * The new compareTo method
+     * */
+    @Override
+    public int compareTo(Bill o) {
+
+        if (getClass() != o.getClass())
+        {
+            throw new IllegalArgumentException();
+        }
+        return this.getAmount().compareTo(o.getAmount());
+    }
+
+    /**
+     * The new clone method
+     * */
+    @Override
+    public Bill clone(){
+        Bill b;
+        try
+        {
+            b = (Bill) super.clone();
+            b.dueDate = (Date) dueDate.clone();
+            b.paidDate = (Date) paidDate.clone();
+            b.amount = (Money) amount.clone();
+            return b;
+        }
+        catch(CloneNotSupportedException e)
+        {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
     }
 }

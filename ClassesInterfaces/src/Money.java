@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 /**
  * @author Patrick O'Brien
  * @version 10/22/2019
@@ -15,8 +17,11 @@
  * cents. All dollars and cents will be positive or 0, and cents will never exceed 99.
  * */
 
-public class Money
+public class Money implements Comparable<Money>, Cloneable, Serializable
 {
+    // Declare serial version
+    private static final long serialVersionUID = 5858596946307207597L;
+
     // declare instance variables
     private int dollars;
     private int cents;
@@ -218,5 +223,37 @@ public class Money
     public String toString()
     {
         return "$" + dollars + "." + cents; // concatenate the string and return
+    }
+
+    /**
+     * This method is the new compareTo method
+     * */
+    @Override
+    public int compareTo(Money o)
+    {
+        if (getClass() != o.getClass())
+        {
+            throw new IllegalArgumentException();
+        }
+        return Double.compare(o.getMoney(), getMoney());
+    }
+
+    /**
+     * The new clone method
+     * */
+    @Override
+    public Money clone()
+    {
+        Money m;
+        try
+        {
+            m = (Money) super.clone();
+            return m;
+        }
+        catch (CloneNotSupportedException e)
+        {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
     }
 }

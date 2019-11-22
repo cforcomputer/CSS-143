@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 /**
  * @author Patrick O'Brien
  * @version 10/22/2019
@@ -9,8 +11,10 @@
  *  * Data privacy should be maintained at all times.
  * */
 
-public class Date
+public class Date implements Comparable<Date>, Cloneable, Serializable
 {
+    // implement the new serial
+    private static final long serialVersionUID = -251929286948567102L;
     // Declare instance variables day, month, year
     private int day;
     private int month;
@@ -160,5 +164,75 @@ public class Date
     public int getYear()
     {
         return year;
+    }
+
+    /**
+     * New method isAfter
+     * @returns true if the compareTo date is after the date
+     * */
+    public boolean isAfter(Date compareTo)
+    {
+        int cmp = Integer.compare(compareTo.year, year);
+        if(cmp == 0)
+        {
+            cmp = Integer.compare(compareTo.month, month);
+            if(cmp == 0)
+            {
+                cmp = Integer.compare(compareTo.day, day);
+                return cmp < 0;
+            } else {
+                return cmp < 0;
+            }
+        }
+        else
+        {
+            return cmp < 0;
+        }
+    }
+
+    /**
+     * New compareTo method
+     * @param o = Date class object
+     * */
+    @Override
+    public int compareTo(Date o)
+    {
+        if (getClass() != o.getClass())
+        {
+            throw new IllegalArgumentException();
+        }
+
+        if(this.equals(o))
+        {
+            return 0;
+        }
+
+        else if (this.isAfter(o))
+        {
+            return 1;
+        }
+
+        else
+        {
+            return -1;
+        }
+    }
+
+    /**
+     * Overrides clone
+     * */
+    public Date clone()
+    {
+        Date d;
+        try
+        {
+            d = (Date) super.clone();
+            return d;
+        }
+        catch (CloneNotSupportedException e)
+        {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
     }
 }
