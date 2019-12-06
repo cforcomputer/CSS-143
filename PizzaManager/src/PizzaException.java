@@ -8,19 +8,18 @@ public class PizzaException extends RuntimeException {
     /**
      * passes the string to super constructor
      *
-     * @param String
+     * @param string = String
      */
     public PizzaException(String string) {
         // TODO Auto-generated constructor stub
         super(string);
     }
 
-
     /**
      * no-arg constructor
      */
-    public PizzaException(){
-        super("Error in making your pizza.");
+    public PizzaException() {
+        super("There was an ERROR when making your pizza");
         //uses super constructor with this string
     }
 }

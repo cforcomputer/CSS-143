@@ -57,8 +57,8 @@ public class ArrayList<TBA extends Comparable> {
      * Insert method is what allows you to insert elements to arraylist
      * and uses a dynamic resize
      *
-     * @param in
-     * @param spot
+     * @param in = TBA
+     * @param spot = int
      */
     public void insert(TBA in, int spot) {
         //store the input TBA ("object") as a variable
@@ -84,14 +84,10 @@ public class ArrayList<TBA extends Comparable> {
             numElements++; // updates the highest point
         }
 
-
         if (spot > numElements) {
             numElements = spot;
         }
         //if param is larger, change numElements to the new highest spot
-
-
-
     }
 
     /**
@@ -99,7 +95,7 @@ public class ArrayList<TBA extends Comparable> {
      * and then return the thing you removed.
      * it also changes the number of elements in the array
      *
-     * @param index
+     * @param index = int
      * @return TBA
      */
     public TBA remove(int index) {
@@ -121,21 +117,20 @@ public class ArrayList<TBA extends Comparable> {
     /**
      * shiftleft method called in the remove method
      *
-     * @param start
+     * @param start = int
      */
     private void shiftLeft(int start) {
         //iterate over array
         for (int first = start; first < numElements; first++) {
             arrayList[first] = (TBA) arrayList[first + 1];
             //shift left
-
         }
     }
 
-    /*
+    /**
      * shiftright method called in the insert method
      *
-     * @param int
+     * @param start = int
      */
     private void shiftRight(int start) {
         //iterate over array
