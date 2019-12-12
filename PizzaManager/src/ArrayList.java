@@ -49,7 +49,7 @@ public class ArrayList<TBA extends Comparable> {
         }
         //if true, cast input param to ArrayList type
 
-        //compareto checking equivalence
+        //compareTo checking equivalence
         return Integer.compare(this.numElements, o.numElements);
     }
 
@@ -67,7 +67,7 @@ public class ArrayList<TBA extends Comparable> {
         if (in == null || spot < 0) {
             throw new PizzaException("Bad params");
         }
-        //if the highest spot is out of bounds, RESIZE the array!!!
+        //if the highest spot is out of bounds, resize
         if (spot >= arrayList.length) {
             arrayList = resize(spot + 1);
         }
@@ -128,7 +128,7 @@ public class ArrayList<TBA extends Comparable> {
     }
 
     /**
-     * shiftright method called in the insert method
+     * shift right method called in the insert method
      *
      * @param start = int
      */
@@ -188,8 +188,8 @@ public class ArrayList<TBA extends Comparable> {
      */
     public boolean isEmpty() {
         for (int first = 0; first < numElements; first++)
-            //iterate over aray
 
+            //iterate over array
             if ((TBA) arrayList[first] != null) {
                 //check null
                 return false;
@@ -208,14 +208,13 @@ public class ArrayList<TBA extends Comparable> {
         TBA temp = (TBA) arrayList[idx1];
         // sets a temp variable to first object
 
-
         arrayList[idx1] = arrayList[idx2];
         //swap
         arrayList[idx2] = temp;
     }
 
     /**
-     * equals method compares to objects to see if theyre equal
+     * equals method compares to objects to see if equal
      *
      * @param o = Object to be compared
      * @see java.lang.Object#equals(java.lang.Object)

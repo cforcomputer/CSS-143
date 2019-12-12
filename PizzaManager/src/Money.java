@@ -123,6 +123,7 @@ public class Money implements Comparable{
      * @param other = Object
      * @return boolean
      */
+    @Override
     public boolean equals(Object other){
         if (!(other instanceof Money)) {
             return false; //if input Obj is null or not an instance of Money class, return false

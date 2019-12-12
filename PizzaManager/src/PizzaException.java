@@ -11,7 +11,6 @@ public class PizzaException extends RuntimeException {
      * @param string = String
      */
     public PizzaException(String string) {
-        // TODO Auto-generated constructor stub
         super(string);
     }
 

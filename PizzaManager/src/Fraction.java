@@ -145,7 +145,7 @@ public class Fraction implements Comparable {
      * @param amount = Fraction
      */
     public Fraction remove(Fraction amount) {
-        int n, d = 0;
+        int n, d;
 
         if (getDenominator() == amount.getDenominator()){
             n = (getNumerator()-amount.getNumerator());
