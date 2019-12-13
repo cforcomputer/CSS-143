@@ -1,0 +1,15 @@
+
+
+1. An abstract data type is the concept, it’s the abstract structure. “Abstract” meaning that it’s an abstraction; a conceptual overview/definition of the data type. It defines how the type properties and operations are handled to change the data type. These operations are public methods of a class in object oriented programming. An abstract data type will be modified depending on how the methods, their parameters, and return types are handled. An ADT is not concerned with the code contained within the methods.
+
+ 
+
+2. An abstract data type is an abstraction that deals with the implementation of methods, their parameters, and their return types. A data structure on the other hand is a concrete thing - like an algorithm that can be logically defined and then implemented inside a method. A data structure, unlike the ADT - considers code implementation. Therefore a data structure is directly defined logically and can then be implemented in code.
+
+ 
+
+3. A queue is first-in-first out, meaning that items can only be added to the end of the queue, and that you can only remove items from the front of the queue. A stack on the other hand is last-in-last-out, which means that you can only add items to the end of the structure, and then only access that last item that you accessed. You can think of it like the backwards and forwards functionality in a browser. A similarity between a stack and a queue is that they both do not allow you to pick items from the middle of the structure. You can only view the items from either end.
+
+ 
+
+4. An ArrayList differs from an array because an ArrayList size is dynamic, while an array is fixed. An array can be created from primitive types, while an ArrayList cannot. Instead, an ArrayList will reference objects stored in different locations in memory (not contingously). An array is stored contingously, where each location in memory is side by side.  The size method for ArrayLists returns an instance variable that keeps track of the size of the ArrayList. The length instance variable for an array uses the declared length of an array to return that allocated length.

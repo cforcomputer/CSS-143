@@ -1,0 +1,206 @@
+/**
+
+ * Assume credit and debit methods change the account balance.
+
+ * A company has written a large class BankingAccount with many methods including:
+
+ *   Method/Constructor     Description
+
+ *   public BankingAccount(Startup s)   constructs a BankingAccount object using information in the Startup object s
+
+ *   public void debit(Debit d)     records the given debit
+
+ *   public void credit(Credit c)   records the given credit
+
+ *   public int getBalance()    returns current balance in pennies
+
+ *
+
+ *   Design a new class MinMaxAccount whose instances can be used in place of a BankingAccount object but include
+
+ *   new behavior of remembering the minimum and maximum balances ever recorded for the account.
+
+ *   You should provide the same methods as the superclass, as well as the following new behavior:
+
+ * 
+
+ */
+
+
+
+
+
+public class MinMaxAccount extends BankingAccount
+
+{
+
+
+    // Instance variables
+
+
+    private int min;
+
+
+    private int max;
+
+    
+
+    /**
+
+     * This method takes the debit object and takes the super version balance and calls
+
+     * setMinMax to set the new maximum or minimum based on the value in super.getBalance.
+
+
+     * @param d = Debit class object
+
+     */
+
+
+    @Override
+
+
+    public void debit(Debit d) 
+
+    {
+
+
+        super.debit(d);
+
+
+        setMinMax(super.getBalance());
+
+    }
+
+
+
+    /**
+
+     * 
+
+
+     * @param c
+
+     */
+
+
+    @Override
+
+
+    public void credit(Credit c) 
+
+    {
+
+
+        super.credit(c);
+
+
+        setMinMax(super.getBalance());
+
+    }
+
+
+
+    /**
+
+    * Constructs a MinMaxAccount object using the information in the Startup object s
+
+    */
+
+
+    public MinMaxAccount(Startup s) 
+
+    {
+
+
+        super(s); // create a Startup object override, input Startup object as s
+
+
+        min = s.startup_getBalance(); // assign min value to overridden Startup object
+
+
+        max = s.startup_getBalance(); // assign max to overridden startup object
+
+    }
+
+
+
+    /**
+
+     * This method sets the max equal to the value if the value is greater than the max,
+
+     * otherwise if the value is less than the minimum, it sets the value to be the new
+
+     * minimum value.
+
+
+     * @param val
+
+     */
+
+
+    private void setMinMax(int x) 
+
+    {
+
+
+        if (x > max) {
+
+
+            max = x;
+
+        }
+
+
+        if (x < min) {
+
+
+            min = x;
+
+        }
+
+    }
+
+
+
+     /**
+
+     * getter method for minimum balance
+
+
+     * @return returns minimum balance in pennies
+
+     */
+
+
+    public int getMin() 
+
+    {
+
+
+        return min;
+
+    }
+
+
+
+     /**
+
+     * getter method for maximum balance 
+
+
+     * @return returns maximum balance in pennies
+
+     */
+
+
+    public int getMax() 
+
+    {
+
+
+        return max;
+
+    }
+
+}

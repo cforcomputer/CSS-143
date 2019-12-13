@@ -1,0 +1,22 @@
+
+
+    Describe, in your own words, how to find an algorithm's Big-O given an expression for running time T(n).  DO NOT copy the text or any other source.
+
+
+    In Display 15.32 on p. 870, we see a graph comparing various running times.  How does T(N)=2N compare with T(N)=N? Do they have the same or different Big-O?
+
+
+    In Display 15.32 on p. 870, we see a graph comparing various running times.  How does T(N)=2N compare with T(N)=0.5N2?  Do they have the same or different Big-O?
+
+ 
+
+When you find the Big-O using the algorithm’s runtime, you are essentially comparing how long it takes to run the program’s different functions. You then add the runtime of each function T(n) together, and you’ll then be able to say with certainty how long the total runtime is.
+If one function takes T(n) = 6N +7, then the runtime     will take N number of steps discarding constants. Therefore the Big-O of the algorithm would be O(N) since it takes a 6N times to complete the operation. This means that the size of the (array, input, etc) is directly dependent on the run time of the function.
+
+ 
+
+According to the graph, T(N) = 2N would not have the same Big-O as T(N) = N, since 2N is essentially the same as N * N or N^2 which would mean the operation of T(N) = 2N would have a runtime of O(N^2) and T(N) = N would have the runtime of O(N). 
+
+ 
+
+T(N) = 2N is linear -- meaning that in the context of runtime, the time it takes to run an algorithm scales linearly with its size. In the case of T(N) = 0.5N^2, it’s exponential; this means that the algorithm may work better with smaller inputs, but then after a certain size it becomes far less efficient than the other 2N algorithm, and will eventually become unusable. The 2N algorithm however will continue to function with the same efficiency regardless of the size.
