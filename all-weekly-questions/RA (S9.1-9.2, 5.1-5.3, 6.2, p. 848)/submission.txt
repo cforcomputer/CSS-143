@@ -1,0 +1,37 @@
+
+Questions
+
+    Describe, in your own words, what is an exception and what does it mean to throw an exception. DO NOT copy the text or any other source.
+    Do Self-Test Exercise 24 on p. 567-568.
+    Describe, in your own words, what is the difference between a static method/variable and instance method/variable. DO NOT copy the text or any other source.
+    Do Self-Test Exercise 20 on p. 284.
+    Do Self-Test Exercise 12 on p. 368.
+
+Answers
+
+ 
+
+    An exception is an event that occurs during the normal operation of a program that somehow interferes with the ability of the program to continue with its normal operation.
+        When you “throw” an exception, you’re not using something inside a method, like a try-catch block. Instead you are creating a new method that tells the compiler that the entire method can throw an exception that would normally be caught by the singular try-catch block defined in the method.
+        In essence, you can easily reuse the error code by simply saying that a method can throw the defined exception, as you could reuse any traditional method to save on how much time it takes to code something.
+    Self test exercise 24:
+    Trying
+    Starting sampleMethod.
+    Catching
+    End program.
+
+    The difference between a static method/variable and an instance method/variable
+        Static means that in every instance the class will have only one copy of the method/variable. If you change or update it in another class, it will change or update in every class. Static variables are also instantiated before the program starts, also a static variable or method can only access other static variables or methods. 
+    Self test exercise 20
+    Objects are Not equal.
+    Self test exercise 12 on p. 368
+    At first glance the method does compile and accomplish its task of returning a char[] array after incrementing through the array and filling it with the capitalized value i. If an array a is correctly allocated, it will return the upper case values. a b c to ABC.
+
+    There are several issues: first, in the context of the problem it can be private, not public.
+    Second: It’s static, which means that technically the return value isn’t necessary, since
+
+    there is only ever one copy of the array. You could make the method a void method and 
+
+    perform the same task, it would still overwrite the original array the moment you call the
+
+    method. This may not be the desired outcome and could lead to complications.
